@@ -1,5 +1,7 @@
 <?php
 
+date_default_timezone_set("America/New_York");
+
 echo "<br>";
 print_r($_POST);
 echo "<br>";
@@ -11,29 +13,48 @@ $include_number 		= isset($_POST["include_number"]);
 $capitalize_first_word 	= isset($_POST["capitalize_first_word"]);
 
 //Set of available password words
-$words = array ("one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten");
-shuffle($words);
+$words = get_dictionary_words($num_words);
 
 // Generate password
 $first_word = array_pop($words);
-$password_array = array();
-for ($i = 0; $i < $num_words - 1; $i++){
-	array_push($password_array, array_pop($words));
-}
 
 if ($include_number){
 	$random_number = rand(1, 99);
-	array_push($password_array, $random_number);
+	array_push($words, $random_number);
 }
 if ($include_special_symbol){
 	$special_symbols = array("!", "@", "#", "$", "%", "&", "*", "~", "?");
 	$rand_symbols_index = rand(0, count($special_symbols) - 1);
-	array_push($password_array, $special_symbols[$rand_symbols_index]);
+	array_push($words, $special_symbols[$rand_symbols_index]);
 }
 if ($capitalize_first_word){
 	$first_word = ucfirst($first_word);
 }
 
 //Output 
-shuffle($password_array);
-echo $first_word . (count($password_array) > 0 ? "-" . join("-", $password_array) : "");
+shuffle($words);
+echo $first_word . (count($words) > 0 ? "-" . join("-", $words) : "");
+
+function get_dictionary_words($num_words){
+	$filename = "brit-a-z.txt";
+	$handle = fopen($filename, "r");
+	$contents = fread($handle, filesize($filename));
+	fclose($handle);
+
+	$dictionary_words = explode("\n", $contents);
+
+	shuffle($dictionary_words);
+
+	$word_array = array();
+
+	$i = 0;
+
+	while ($i < $num_words){
+		$dictionary_word = trim(array_pop($dictionary_words));
+		if (ctype_alpha($dictionary_word)){
+			array_push($word_array, $dictionary_word);
+			$i++;
+		}
+	}
+	return $word_array;
+}
