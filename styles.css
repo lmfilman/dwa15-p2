@@ -1,3 +1,30 @@
-.morning {
-	background-color:#C0C0C0;
+
+.wrap {
+	margin: 20px;
+	font: 15px Helvetica, sans-serif;
+	width: 900px;
 }
+.wrap_left {
+	float: left;
+	width: 550px;
+}
+.indented_error{
+	position: relative;
+	left:40px;
+	color:#800000;
+
+}
+.user_input {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+.results {
+	font: 24px Helvetica, sans-serif;
+}
+
+.wrap_right {
+	float: right;
+	width:350px;
+	margin-top: 215px;
+}
+

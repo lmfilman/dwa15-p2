@@ -2,11 +2,6 @@
 
 date_default_timezone_set("America/New_York");
 
-echo "<br>";
-print_r($_POST);
-echo "<br>";
-
-
 // Get user input
 if(isset($_POST['num_words'])){ 
 	$num_words = $_POST['num_words']; 
@@ -17,10 +12,14 @@ $include_special_symbol = isset($_POST["include_special_symbol"]);
 $include_number 		= isset($_POST["include_number"]);
 $capitalize_first_word 	= isset($_POST["capitalize_first_word"]);
 
+// Server-side errors
+$num_words_error = false;
+$password = "";
+
 // Validate user input
 if ((!is_numeric($num_words) || $num_words > 10 || $num_words < 1)){
-	//Throw error
-	echo "ERROR";
+	// Throw error
+	$num_words_error = true;
 
 } else {
 
@@ -42,11 +41,10 @@ if ((!is_numeric($num_words) || $num_words > 10 || $num_words < 1)){
 	if ($capitalize_first_word){
 		$first_word = ucfirst($first_word);
 	}
-
-	//Output 
 	shuffle($words);
-	echo $first_word . (count($words) > 0 ? "-" . join("-", $words) : "");
 
+	//  
+	$password = $first_word . (count($words) > 0 ? "-" . join("-", $words) : "");
 }
 
 function get_dictionary_words($num_words){

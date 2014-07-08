@@ -13,22 +13,37 @@ ini_set('display_errors', 1);
 
 		<link rel="stylesheet" href="styles.css" type="text/css">
 	</head>
-	<body class="morning">
-		<div>
-			<div><h1>P2:PHP Basics - Laura Filman - Dynamic Web Applications</h1></div>
-			<div>Add explanation here</div>
-			<div><img src="http://imgs.xkcd.com/comics/password_strength.png" alt="XKCD password strength" title="XKCD password strength" height="42" width="42"></div>
+	<body class = "wrap">
+		<div class = "wrap_left">
 			<div>
+				<div>
+					<h1>P2:PHP Basics - Laura Filman</h1>
+				</div>
+				<a href = "http://xkcd.com/936/">
+					<img src="http://imgs.xkcd.com/comics/password_strength.png" alt="XKCD password strength" title="XKCD password strength" width="500" height="375">
+				</a>
+			</div>
+			<div class="user_input">
 				<form action="index.php" method="POST">
-					Number of words: <input type="text" name="num_words" id="num_words" value=<?php echo "'" . $num_words . "'";?> ></br>
-					Include special symbol (eg. @): <input type="checkbox" name="include_special_symbol" id="include_special_symbol" <?php if ($include_special_symbol) {echo "checked";} ?>></br>
-					Include number: <input type="checkbox" name="include_number" id="include_number" <?php if ($include_number) {echo "checked";} ?>></br>
-					Capitalize first word: <input type="checkbox" name="capitalize_first_word" id="capitalize_first_word" <?php if ($capitalize_first_word) {echo "checked";} ?>></br>
-					<input type="submit" value="Submit">
+					<div>Number of words (within 1 to 10): <input type="text" name="num_words" id="num_words" value=<?php echo "'" . $num_words . "'";?> >
+						<div class="indented_error"><?php if ($num_words_error) echo "Please enter a number from 1 to 10."; ?></div>
+					</div>
+					<div>Include special symbol (eg. @): <input type="checkbox" name="include_special_symbol" id="include_special_symbol" <?php if ($include_special_symbol) {echo "checked";} ?>></div>
+					<div>Include number: <input type="checkbox" name="include_number" id="include_number" <?php if ($include_number) {echo "checked";} ?>></div>
+					<div>Capitalize first word: <input type="checkbox" name="capitalize_first_word" id="capitalize_first_word" <?php if ($capitalize_first_word) {echo "checked";} ?>></div>
+					<input type="submit" value="Resubmit" style="float: right; margin-right: 20px">
 				</form>
 			</div>
 		</div>
+		<div class = "wrap_right">
+			<p>Add explanation here</p>
+			<div class="results">
+				<?php echo $password?>
+			</div>
+		</div>
+
 	</body>
 
 	
 </html>
+</div>
