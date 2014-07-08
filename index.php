@@ -11,9 +11,7 @@
 	<body class = "wrap">
 		<div class = "wrap_left">
 			<div>
-				<div>
-					<h1>Password Generator</h1>
-				</div>
+				<h1>Password Generator</h1>
 				<a href = "http://xkcd.com/936/">
 					<img src="http://imgs.xkcd.com/comics/password_strength.png" alt="XKCD password strength" title="XKCD password strength" width="500" height="375">
 				</a>
@@ -23,9 +21,11 @@
 		<div class = "wrap_right">
 			<div>
 				<h2>Steps:</h2>
-				<li>Read XKCD's comic on creating memorable passwords</li>
-				<li>Modify password constraints</li>
-				<li>Click resubmit!</li>
+				<ol>
+					<li>Read XKCD's comic on creating memorable passwords</li>
+					<li>Modify password constraints</li>
+					<li>Click resubmit!</li>
+				</ol>
 			</div>
 			<div class="user_input">
 				<h2>Password Constraints:</h2>
@@ -50,4 +50,3 @@
 
 	
 </html>
-</div>
