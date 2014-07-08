@@ -6,34 +6,48 @@ echo "<br>";
 print_r($_POST);
 echo "<br>";
 
+
 // Get user input
-$num_words 				= $_POST["num_words"];
+if(isset($_POST['num_words'])){ 
+	$num_words = $_POST['num_words']; 
+} else {
+	$num_words = "3";
+}
 $include_special_symbol = isset($_POST["include_special_symbol"]);
 $include_number 		= isset($_POST["include_number"]);
 $capitalize_first_word 	= isset($_POST["capitalize_first_word"]);
 
-//Set of available password words
-$words = get_dictionary_words($num_words);
+// Validate user input
+if ((!is_numeric($num_words) || $num_words > 10 || $num_words < 1)){
+	//Throw error
+	echo "ERROR";
 
-// Generate password
-$first_word = array_pop($words);
+} else {
 
-if ($include_number){
-	$random_number = rand(1, 99);
-	array_push($words, $random_number);
-}
-if ($include_special_symbol){
-	$special_symbols = array("!", "@", "#", "$", "%", "&", "*", "~", "?");
-	$rand_symbols_index = rand(0, count($special_symbols) - 1);
-	array_push($words, $special_symbols[$rand_symbols_index]);
-}
-if ($capitalize_first_word){
-	$first_word = ucfirst($first_word);
-}
+	// Get words from dictionary
+	$words = get_dictionary_words($num_words);
 
-//Output 
-shuffle($words);
-echo $first_word . (count($words) > 0 ? "-" . join("-", $words) : "");
+	// Generate password
+	$first_word = array_pop($words);
+
+	if ($include_number){
+		$random_number = rand(1, 99);
+		array_push($words, $random_number);
+	}
+	if ($include_special_symbol){
+		$special_symbols = array("!", "@", "#", "$", "%", "&", "*", "~", "?");
+		$rand_symbols_index = rand(0, count($special_symbols) - 1);
+		array_push($words, $special_symbols[$rand_symbols_index]);
+	}
+	if ($capitalize_first_word){
+		$first_word = ucfirst($first_word);
+	}
+
+	//Output 
+	shuffle($words);
+	echo $first_word . (count($words) > 0 ? "-" . join("-", $words) : "");
+
+}
 
 function get_dictionary_words($num_words){
 	$filename = "brit-a-z.txt";
